@@ -5,11 +5,11 @@ using UnityEngine;
 public class Separation : SteeringBehavior
 {
     public Kinematic character;
-    float maxAcceleration = 1f;
+    public float maxAcceleration = 1f;
 
     public List<Kinematic> targets;
     // the threshold to take action
-    float threshold = 10f; // 5
+    public float threshold = 10f; // 5
 
     // the constant coefficient of decay for the inverse square law
     float decayCoefficient = 100f;
