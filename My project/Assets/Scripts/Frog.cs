@@ -9,10 +9,8 @@ public class Frog : MonoBehaviour
     public GameObject target;
     public float launchForce = 10f;
     Rigidbody rb;
-    Vector3 startPos;
     private void Start()
     {
-        startPos = transform.position;
         Time.timeScale = myTimeScale;
         rb = GetComponent<Rigidbody>();
     }

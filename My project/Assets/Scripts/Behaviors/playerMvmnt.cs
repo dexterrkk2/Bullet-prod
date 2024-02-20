@@ -7,7 +7,7 @@ using UnityEngine.UIElements;
 public class playerMvmnt : Seek
 {
     public float speed;
-    public float rotateSpeed;
+    public float RotateAmount;
     public override SteeringOutput getSteering()
     {
         SteeringOutput output = new SteeringOutput();
@@ -22,11 +22,15 @@ public class playerMvmnt : Seek
         }
         else if(Input.GetKey(KeyCode.D))
         {
-            output.linear = character.transform.right* speed * 5;
+            Quaternion rotation = new Quaternion();
+            rotation = Quaternion.Euler(0, RotateAmount, 0);
+            character.transform.Rotate(rotation.eulerAngles);
         }
         else if (Input.GetKey(KeyCode.A))
         {
-            output.linear = -character.transform.right * speed *5;
+            Quaternion rotation = new Quaternion();
+            rotation = Quaternion.Euler(0, -RotateAmount, 0);
+            character.transform.Rotate(rotation.eulerAngles);
         }
         return output;
     }

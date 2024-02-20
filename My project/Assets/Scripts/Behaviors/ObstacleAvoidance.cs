@@ -12,6 +12,10 @@ public class ObstacleAvoidance : Seek
         if(Physics.Raycast(character.transform.position, character.linearVelocity, out hit, lookAhead))
         {
             Debug.DrawRay(  character.transform.position, hit.point);
+            if(hit.collider.tag == "Player")
+            {
+                return Vector3.zero;
+            }
             return hit.point + (hit.normal * avoidDistance);
         }
         else

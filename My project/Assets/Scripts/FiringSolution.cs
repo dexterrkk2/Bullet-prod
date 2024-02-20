@@ -12,14 +12,14 @@ public class FiringSolution
             return null;
         }
         Vector3 delta = end-start;
-        Debug.Log("Time to target: " + ttt);
-        Debug.Log("Vector to target: " + delta);
+        //Debug.Log("Time to target: " + ttt);
+        //Debug.Log("Vector to target: " + delta);
         Vector3 n1 = delta * 2;
         Vector3 n2 = gravity * (ttt.Value * ttt.Value);
         float d = 2 * muzzleVelocity * ttt.Value;
         Vector3 solution = (n1 - n2) / d;
-        Debug.Log("solution = " + n1 + " - " + n2 + " / " + d);
-        Debug.Log("solution = " + solution);
+        //Debug.Log("solution = " + n1 + " - " + n2 + " / " + d);
+        //Debug.Log("solution = " + solution);
         return solution;
     }
     public Nullable<float> GetTimeToTarget(Vector3 start, Vector3 end, float muzzleV, Vector3 gravity)
@@ -61,7 +61,7 @@ public class FiringSolution
             //Short
             //ttt = Mathf.Min(time0, time1);
             //Long
-            ttt = Mathf.Max(time0, time1);
+            ttt = Mathf.Min(time0, time1);
         }
 
         return ttt;

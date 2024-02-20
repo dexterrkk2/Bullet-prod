@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class FpsEnemy : Kinematic
+using UnityEngine.SceneManagement;
+using System.Linq;
+public class FpsEnemy : Kinematic, INPC
 {
+    public int hp;
     RangedEnemy myMoveType;
     public List<Kinematic> targets;
     public bool flee = false;
@@ -13,6 +15,7 @@ public class FpsEnemy : Kinematic
     // Start is called before the first frame update
     void Start()
     {
+        //targets = FindObjectsOfType<Kinematic>().ToList<Kinematic>();
         myMoveType = new RangedEnemy();
         myMoveType.character = this;
         myMoveType.target = myTarget;
@@ -36,6 +39,15 @@ public class FpsEnemy : Kinematic
         steeringUpdate.linear = myMoveType.getSteering().linear;
         steeringUpdate.angular = flee ? myFleeRotateType.getSteering().angular : mySeekRotateType.getSteering().angular;
         base.Update();
+    }
+    public void TakeDamage(int damage)
+    {
+        hp -= damage;
+        Debug.Log(hp);
+        if (hp <= 0)
+        {
+            Destroy(this.gameObject);
+        }
     }
 }
 

@@ -19,9 +19,7 @@ public class RangedEnemy : PrioritySteering
         ObstacleAvoidance obstacleAvoidance = new ObstacleAvoidance();
         BlendedSteering seekBlend = new BlendedSteering();
         BehaviourandWeight seekWeight = new BehaviourandWeight();
-        BehaviourandWeight faceWeight = new BehaviourandWeight();
-        Seek seek = new Seek();
-        Face face = new Face();
+        Pursue seek = new Pursue();
         seekBlend.behaviours = new List<BehaviourandWeight>();
         obstacleBlend.behaviours = new List<BehaviourandWeight>();
         seperateBlend.behaviours = new List<BehaviourandWeight>();    
@@ -39,7 +37,7 @@ public class RangedEnemy : PrioritySteering
         seperateWeight.Behavior = seperate;
         seperateWeight.weight = 5;
         seekWeight.Behavior = seek;
-        seekWeight.weight = 3;
+        seekWeight.weight = 5;
         seekBlend.behaviours.Add(seekWeight);
         //bblend Setup
         obstacleBlend.behaviours.Add(obstacleWeight);

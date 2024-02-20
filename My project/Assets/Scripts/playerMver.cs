@@ -2,16 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
-
-public class playerMver : Kinematic
+using UnityEngine.SceneManagement;
+public class playerMver : Kinematic, INPC
 {
+    public int hp;
     playerMvmnt myMoveType;
     LookWhereGoing mySeekRotateType;
     LookWhereGoing myFleeRotateType;
     public float speed;
-    public float rotateSpeed;
     public bool flee = false;
+    public float RotateAmount;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,8 +20,7 @@ public class playerMver : Kinematic
         myMoveType.target = myTarget;
         myMoveType.flee = flee;
         myMoveType.speed = speed;
-        myMoveType.rotateSpeed = rotateSpeed;
-
+        myMoveType.RotateAmount = RotateAmount;
         mySeekRotateType = new LookWhereGoing();
         mySeekRotateType.character = this;
         mySeekRotateType.target = myTarget;
@@ -35,8 +34,16 @@ public class playerMver : Kinematic
     protected override void Update()
     {
         steeringUpdate = new SteeringOutput();
-        steeringUpdate.linear = myMoveType.getSteering().linear;
-        steeringUpdate.angular = flee ? myFleeRotateType.getSteering().angular : mySeekRotateType.getSteering().angular;
+        steeringUpdate = myMoveType.getSteering();
         base.Update();
+    }
+    public void TakeDamage(int damage)
+    {
+        hp -= damage;
+        Debug.Log(hp);
+        if (hp <= 0)
+        {
+            SceneManager.LoadScene(0);
+        }
     }
 }
